@@ -37,10 +37,29 @@ const MORSE_TABLE = {
     '-----': '0',
 };
 
+
 function decode(expr) {
-    // write your solution here
+    let res = [];
+    let arrayOfWords = expr.match(/.{1,10}/g);
+    arrayOfWords.forEach(function(word) {
+        let a = (Array.from(word));
+        while (a.length > 0 && Number(a[0]) === 0) {
+            a.shift();
+        }
+        if (word == "**********") {
+            res.push(" ");
+            return;
+        }
+        let letterMorse = [];
+        while (a.length > 0) {
+            letterMorse.push(a.splice(0, 2).join("") === "10" ? "." : "-");
+        }
+
+        res.push(MORSE_TABLE[letterMorse.join("")]);
+    });
+    return res.join("");
 }
 
 module.exports = {
-    decode init
+    decode
 }
